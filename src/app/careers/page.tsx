@@ -7,11 +7,11 @@ import { motion } from "framer-motion";
 
 export default function Careers() {
   const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
     },
   };
 
@@ -20,20 +20,25 @@ export default function Careers() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.15,
       },
     },
   };
 
   return (
-    <div className="overflow-hidden bg-[#0B0B12] text-white relative">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="overflow-hidden bg-[#0B0B12] text-white relative"
+    >
       {/* Ambient background textures */}
       <div className="noise-overlay" />
       <div className="mesh-gradient absolute inset-0 pointer-events-none -z-10" />
       {/* Hero Section */}
       <section className="relative py-24 md:py-36 border-b border-white/8">
         {/* Subtle background glow */}
-        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary-purple/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary-purple/10 rounded-full blur-[140px] pointer-events-none -z-10 animate-slow-glow" />
         
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <motion.div
@@ -66,18 +71,24 @@ export default function Careers() {
 
       {/* Why Work With Us */}
       <section className="py-24 md:py-36 bg-[#15151E]/20 border-b border-white/8 relative">
-        <div className="absolute top-1/2 left-10 w-[400px] h-[400px] bg-secondary-purple/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+        <div className="absolute top-1/2 left-10 w-[400px] h-[400px] bg-secondary-purple/5 rounded-full blur-[120px] pointer-events-none -z-10 animate-slow-glow" />
         
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <div className="max-w-xl mb-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto px-6 md:px-12 relative z-10"
+        >
+          <motion.div variants={fadeInUp} className="max-w-xl mb-20">
             <span className="text-xs font-bold text-primary-purple tracking-widest uppercase">The Culture</span>
             <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mt-4">
               Why Work With Us
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="glass-card p-8 rounded-2xl border-white/8 hover:border-primary-purple/35 hover:bg-[#15151E]/80 transition-all duration-300 shadow-xl hover:-translate-y-1">
+            <motion.div variants={fadeInUp} className="glass-card glass-card-hover p-8 rounded-2xl shadow-xl flex flex-col items-start">
               <div className="w-12 h-12 rounded-xl bg-primary-purple/10 flex items-center justify-center text-primary-purple mb-6 border border-primary-purple/15">
                 <Sparkles className="w-5 h-5" />
               </div>
@@ -85,9 +96,9 @@ export default function Careers() {
               <p className="text-gray-text text-sm leading-relaxed">
                 Work on digital products that directly impact safety, confidence, and community support for women worldwide.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="glass-card p-8 rounded-2xl border-white/8 hover:border-primary-purple/35 hover:bg-[#15151E]/80 transition-all duration-300 shadow-xl hover:-translate-y-1">
+            <motion.div variants={fadeInUp} className="glass-card glass-card-hover p-8 rounded-2xl shadow-xl flex flex-col items-start">
               <div className="w-12 h-12 rounded-xl bg-primary-purple/10 flex items-center justify-center text-primary-purple mb-6 border border-primary-purple/15">
                 <ShieldCheck className="w-5 h-5" />
               </div>
@@ -95,45 +106,51 @@ export default function Careers() {
               <p className="text-gray-text text-sm leading-relaxed">
                 We are a remote-friendly organization that measures productivity through outputs, respect, and mutual collaboration.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="glass-card p-8 rounded-2xl border-white/8 hover:border-primary-purple/35 hover:bg-[#15151E]/80 transition-all duration-300 shadow-xl hover:-translate-y-1">
-              <div className="w-12 h-12 rounded-xl bg-primary-purple/10 flex items-center justify-center text-primary-purple mb-6 border border-primary-purple/15">
+            <motion.div variants={fadeInUp} className="glass-card glass-card-hover p-8 rounded-2xl shadow-xl flex flex-col items-start">
+              <div className="w-12 h-12 rounded-xl bg-primary-purple/10 flex items-center justify-center text-primary-purple mb-6 border border-primary-purple/15 shrink-0">
                 <Heart className="w-5 h-5" />
               </div>
               <h3 className="font-extrabold text-white text-lg mb-3">Inclusive Growth</h3>
               <p className="text-gray-text text-sm leading-relaxed">
                 Our team represents diverse experiences and views, ensuring that our workplace is just as supportive as the apps we create.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="glass-card p-8 rounded-2xl border-white/8 hover:border-primary-purple/35 hover:bg-[#15151E]/80 transition-all duration-300 shadow-xl hover:-translate-y-1">
-              <div className="w-12 h-12 rounded-xl bg-primary-purple/10 flex items-center justify-center text-primary-purple mb-6 border border-primary-purple/15">
+            <motion.div variants={fadeInUp} className="glass-card glass-card-hover p-8 rounded-2xl shadow-xl flex flex-col items-start">
+              <div className="w-12 h-12 rounded-xl bg-primary-purple/10 flex items-center justify-center text-primary-purple mb-6 border border-primary-purple/15 shrink-0">
                 <Zap className="w-5 h-5" />
               </div>
               <h3 className="font-extrabold text-white text-lg mb-3">High Standards</h3>
               <p className="text-gray-text text-sm leading-relaxed">
                 We focus on premium design aesthetics, clean codebases, accessibility, and high performance.
               </p>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Current Opportunities (Empty State) */}
       <section className="py-28 md:py-44 bg-transparent relative overflow-hidden">
         {/* Subtle background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-secondary-purple/5 rounded-full blur-[100px] pointer-events-none -z-10" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-secondary-purple/5 rounded-full blur-[100px] pointer-events-none -z-10 animate-slow-glow" />
         
-        <div className="max-w-4xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-4xl mx-auto px-6 relative z-10"
+        >
+          <motion.div variants={fadeInUp} className="text-center mb-16">
             <span className="text-xs font-bold text-primary-purple tracking-widest uppercase">Open Positions</span>
             <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mt-4">
               Current Opportunities
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="glass-card border-dashed border-white/10 rounded-3xl p-8 md:p-14 text-center max-w-2xl mx-auto relative overflow-hidden shadow-2xl">
+          <motion.div variants={fadeInUp} className="glass-card glass-card-hover border-dashed border-white/10 rounded-3xl p-8 md:p-14 text-center max-w-2xl mx-auto relative overflow-hidden shadow-2xl">
             <HelpCircle className="w-12 h-12 text-primary-purple/80 mx-auto mb-6" />
             <h3 className="text-2xl font-extrabold text-white mb-3">No Open Roles Yet</h3>
             <p className="text-gray-text text-base leading-relaxed mb-10">
@@ -141,14 +158,14 @@ export default function Careers() {
             </p>
             <Link
               href="/contact?ref=careers"
-              className="btn-premium-primary inline-flex items-center gap-2 px-8 py-4 text-base font-semibold transition-all active:scale-[0.98]"
+              className="btn-premium-primary inline-flex items-center gap-2 px-8 py-4 text-base font-semibold transition-all active:scale-[0.98] group"
             >
               Send Your Profile
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
-    </div>
+    </motion.div>
   );
 }

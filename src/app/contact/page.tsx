@@ -212,38 +212,82 @@ function ContactForm() {
 }
 
 export default function Contact() {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 24 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
   return (
-    <div className="overflow-hidden bg-[#0B0B12] text-white relative">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="overflow-hidden bg-[#0B0B12] text-white relative"
+    >
       {/* Ambient background textures */}
       <div className="noise-overlay" />
       <div className="mesh-gradient absolute inset-0 pointer-events-none -z-10" />
       {/* Hero Header */}
       <section className="relative py-24 md:py-36 border-b border-white/8">
         {/* Ambient background glow */}
-        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary-purple/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary-purple/10 rounded-full blur-[140px] pointer-events-none -z-10 animate-slow-glow" />
         
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <div className="max-w-3xl flex flex-col gap-6">
-            <span className="text-xs font-bold text-primary-purple tracking-widest uppercase">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="max-w-3xl flex flex-col gap-6"
+          >
+            <motion.span
+              variants={fadeInUp}
+              className="text-xs font-bold text-primary-purple tracking-widest uppercase"
+            >
               Contact
-            </span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] md:leading-[1.15]">
+            </motion.span>
+            <motion.h1
+              variants={fadeInUp}
+              className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] md:leading-[1.15]"
+            >
               Get in Touch
-            </h1>
-            <p className="text-gray-text text-lg md:text-xl leading-relaxed mt-4">
+            </motion.h1>
+            <motion.p
+              variants={fadeInUp}
+              className="text-gray-text text-lg md:text-xl leading-relaxed mt-4"
+            >
               We look forward to hearing from you. Use the details below or send a message using the form, and we will get back to you.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
         </div>
       </section>
 
       {/* Main Grid */}
       <section className="py-24 md:py-36 bg-transparent relative">
-        <div className="absolute top-1/2 left-10 w-[400px] h-[400px] bg-secondary-purple/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+        <div className="absolute top-1/2 left-10 w-[400px] h-[400px] bg-secondary-purple/5 rounded-full blur-[120px] pointer-events-none -z-10 animate-slow-glow" />
         
-        <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-start relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-start relative z-10"
+        >
           {/* Details Column */}
-          <div className="lg:col-span-5 flex flex-col gap-12">
+          <motion.div variants={fadeInUp} className="lg:col-span-5 flex flex-col gap-12">
             <div>
               <h2 className="text-3xl font-extrabold text-white mb-4">Contact Information</h2>
               <p className="text-gray-text text-base leading-relaxed">
@@ -314,10 +358,10 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Form Column */}
-          <div className="lg:col-span-7">
+          <motion.div variants={fadeInUp} className="lg:col-span-7">
             <Suspense fallback={
               <div className="glass-card shadow-2xl rounded-3xl p-8 flex items-center justify-center h-96 text-gray-text border-white/8">
                 <Loader2 className="w-6 h-6 animate-spin mr-2" /> Loading form...
@@ -325,9 +369,9 @@ export default function Contact() {
             }>
               <ContactForm />
             </Suspense>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
-    </div>
+    </motion.div>
   );
 }

@@ -8,11 +8,11 @@ import { motion } from "framer-motion";
 
 export default function Products() {
   const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
     },
   };
 
@@ -21,20 +21,25 @@ export default function Products() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.15,
       },
     },
   };
 
   return (
-    <div className="overflow-hidden bg-[#0B0B12] text-white relative">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="overflow-hidden bg-[#0B0B12] text-white relative"
+    >
       {/* Ambient background textures */}
       <div className="noise-overlay" />
       <div className="mesh-gradient absolute inset-0 pointer-events-none -z-10" />
       {/* Hero Section */}
       <section className="relative py-24 md:py-36 border-b border-white/8">
         {/* Ambient background glow */}
-        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary-purple/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary-purple/10 rounded-full blur-[140px] pointer-events-none -z-10 animate-slow-glow" />
         
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <motion.div
@@ -68,11 +73,17 @@ export default function Products() {
 
       {/* Cohop Details Section */}
       <section id="cohop" className="py-24 md:py-36 bg-transparent border-b border-white/8 scroll-mt-20 relative">
-        <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-primary-purple/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+        <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-primary-purple/5 rounded-full blur-[120px] pointer-events-none -z-10 animate-slow-glow" />
         
-        <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-20 items-center relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-20 items-center relative z-10"
+        >
           {/* Cohop Left - Copy */}
-          <div className="lg:col-span-6 flex flex-col gap-6">
+          <motion.div variants={fadeInUp} className="lg:col-span-6 flex flex-col gap-6">
             <div className="flex items-center gap-3.5">
               <div className="w-12 h-12 rounded-xl bg-primary-purple/10 flex items-center justify-center text-primary-purple border border-primary-purple/15">
                 <Compass className="w-6 h-6" />
@@ -102,10 +113,10 @@ export default function Products() {
                 <span><strong className="text-white">Local Hubs:</strong> Meet and connect with trusted local female guides and hosts in destination cities.</span>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Cohop Right - Premium Mockup with Overlaid Interactivity */}
-          <div className="lg:col-span-6 flex justify-center w-full">
+          <motion.div variants={fadeInUp} className="lg:col-span-6 flex justify-center w-full">
             <div className="w-full max-w-lg product-card-premium rounded-3xl p-6 shadow-2xl relative border-white/8 overflow-hidden group min-h-[480px]">
               {/* Full background mockup image */}
               <div className="absolute inset-0 z-0">
@@ -173,17 +184,23 @@ export default function Products() {
                 </motion.div>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Maira Details Section */}
       <section id="maira" className="py-24 md:py-36 bg-[#15151E]/20 border-b border-white/8 scroll-mt-20 relative">
-        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-secondary-purple/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-secondary-purple/5 rounded-full blur-[120px] pointer-events-none -z-10 animate-slow-glow" />
         
-        <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-20 items-center relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-20 items-center relative z-10"
+        >
           {/* Maira Left - Mock Interface Card with full mockup background */}
-          <div className="lg:col-span-6 flex justify-center order-2 lg:order-1 w-full">
+          <motion.div variants={fadeInUp} className="lg:col-span-6 flex justify-center order-2 lg:order-1 w-full">
             <div className="w-full max-w-lg product-card-premium rounded-3xl p-6 shadow-2xl relative border-white/8 overflow-hidden group min-h-[480px]">
               {/* Full background mockup image */}
               <div className="absolute inset-0 z-0">
@@ -236,10 +253,10 @@ export default function Products() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Maira Right - Copy */}
-          <div className="lg:col-span-6 flex flex-col gap-6 order-1 lg:order-2">
+          <motion.div variants={fadeInUp} className="lg:col-span-6 flex flex-col gap-6 order-1 lg:order-2">
             <div className="flex items-center gap-3.5">
               <div className="w-12 h-12 rounded-xl bg-secondary-purple/10 flex items-center justify-center text-secondary-purple border border-secondary-purple/15">
                 <Heart className="w-6 h-6" />
@@ -269,64 +286,78 @@ export default function Products() {
                 <span><strong className="text-white">Peer Verification:</strong> Community members can provide vetted peer-reviews and perspectives based on lived experience.</span>
               </li>
             </ul>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Future Products Teaser */}
       <section className="py-24 md:py-36 bg-transparent border-b border-white/8 relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary-purple/3 rounded-full blur-[120px] pointer-events-none -z-10" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary-purple/3 rounded-full blur-[120px] pointer-events-none -z-10 animate-slow-glow" />
         
-        <div className="max-w-7xl mx-auto px-6 md:px-12 text-center relative z-10">
-          <span className="text-xs font-bold text-primary-purple tracking-widest uppercase">The Pipeline</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mt-4 mb-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto px-6 md:px-12 text-center relative z-10"
+        >
+          <motion.span variants={fadeInUp} className="text-xs font-bold text-primary-purple tracking-widest uppercase">The Pipeline</motion.span>
+          <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mt-4 mb-6">
             Building What&apos;s Next
-          </h2>
-          <p className="text-gray-text text-base md:text-lg max-w-xl mx-auto mb-16">
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="text-gray-text text-base md:text-lg max-w-xl mx-auto mb-16">
             Cohop and Maira are just the foundations. Our team is actively researching and prototype testing new tools designed specifically for women&apos;s professional, lifestyle, and wellness needs.
-          </p>
+          </motion.p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <div className="p-8 rounded-2xl border border-dashed border-white/10 bg-white/2 hover:border-primary-purple/20 hover:bg-white/5 transition-all duration-300 text-center">
+            <motion.div variants={fadeInUp} className="p-8 rounded-2xl glass-card glass-card-hover border-dashed shadow-xl text-center flex flex-col items-center">
               <HelpCircle className="w-8 h-8 text-primary-purple/80 mx-auto mb-4" />
               <h3 className="text-base font-bold text-white mb-2">Professional Growth</h3>
               <p className="text-xs text-gray-text leading-relaxed">Tools focused on remote work safety, career pivots, and mentorship.</p>
-            </div>
-            <div className="p-8 rounded-2xl border border-dashed border-white/10 bg-white/2 hover:border-primary-purple/20 hover:bg-white/5 transition-all duration-300 text-center">
+            </motion.div>
+            <motion.div variants={fadeInUp} className="p-8 rounded-2xl glass-card glass-card-hover border-dashed shadow-xl text-center flex flex-col items-center">
               <HelpCircle className="w-8 h-8 text-primary-purple/80 mx-auto mb-4" />
               <h3 className="text-base font-bold text-white mb-2">Financial Independence</h3>
               <p className="text-xs text-gray-text leading-relaxed">Encouraging confidence through curated educational tracks and security tools.</p>
-            </div>
-            <div className="p-8 rounded-2xl border border-dashed border-white/10 bg-white/2 hover:border-primary-purple/20 hover:bg-white/5 transition-all duration-300 text-center">
+            </motion.div>
+            <motion.div variants={fadeInUp} className="p-8 rounded-2xl glass-card glass-card-hover border-dashed shadow-xl text-center flex flex-col items-center">
               <HelpCircle className="w-8 h-8 text-primary-purple/80 mx-auto mb-4" />
               <h3 className="text-base font-bold text-white mb-2">Wellness Ecosystem</h3>
               <p className="text-xs text-gray-text leading-relaxed">Empowering women with verified health insights and decentralized support networks.</p>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* CTA Section */}
       <section className="py-28 md:py-44 bg-transparent text-center relative overflow-hidden">
         {/* Subtle bottom glow */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gradient-to-t from-primary-purple/5 to-transparent rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gradient-to-t from-primary-purple/5 to-transparent rounded-full blur-[100px] pointer-events-none animate-slow-glow" />
 
-        <div className="max-w-3xl mx-auto px-6 relative z-10">
-          <h2 className="text-3xl md:text-6xl font-extrabold text-white tracking-tight mb-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-3xl mx-auto px-6 relative z-10"
+        >
+          <motion.h2 variants={fadeInUp} className="text-3xl md:text-6xl font-extrabold text-white tracking-tight mb-6">
             Help Us Design the Next Product
-          </h2>
-          <p className="text-gray-text text-base md:text-lg mb-12 max-w-xl mx-auto">
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="text-gray-text text-base md:text-lg mb-12 max-w-xl mx-auto">
             Our products start with real conversations. Share your feedback, challenges, or tell us what features you want to see.
-          </p>
-          <Link
-            href="/contact"
-            className="btn-premium-primary inline-flex items-center gap-2 px-8 py-4 text-base font-semibold transition-all active:scale-[0.98]"
-          >
-            Get in Touch
-            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
+          </motion.p>
+          <motion.div variants={fadeInUp}>
+            <Link
+              href="/contact"
+              className="btn-premium-primary inline-flex items-center gap-2 px-8 py-4 text-base font-semibold transition-all active:scale-[0.98] group"
+            >
+              Get in Touch
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </motion.div>
+        </motion.div>
       </section>
-    </div>
+    </motion.div>
   );
 }

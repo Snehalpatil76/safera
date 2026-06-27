@@ -105,14 +105,14 @@ p {
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card-hover:hover {
-  transform: translateY(-4px) scale(1.01);
-  border-color: rgba(139, 92, 246, 0.25);
+  transform: translateY(-6px);
+  border-color: rgba(139, 92, 246, 0.3);
   background: rgba(21, 21, 30, 0.8);
-  box-shadow: 0 20px 50px -10px rgba(139, 92, 246, 0.15), 0 0 20px 0 rgba(139, 92, 246, 0.05);
+  box-shadow: 0 20px 40px -10px rgba(139, 92, 246, 0.25), 0 0 20px 0 rgba(139, 92, 246, 0.1);
 }
 
 /* Premium Buttons */
@@ -122,7 +122,7 @@ p {
   font-weight: 600;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -138,12 +138,12 @@ p {
   background: linear-gradient(135deg, #9b72f8 0%, #b76bf9 100%);
   opacity: 0;
   z-index: -1;
-  transition: opacity 0.3s ease;
+  transition: opacity 250ms ease;
 }
 
 .btn-premium-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5), 0 0 15px rgba(168, 85, 247, 0.2);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.45), 0 0 15px rgba(168, 85, 247, 0.15);
 }
 
 .btn-premium-primary:hover::after {
@@ -158,13 +158,14 @@ p {
   border-radius: 12px;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-premium-secondary:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.05);
 }
 
 /* Link underline transition */
@@ -207,6 +208,35 @@ p {
   background: radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.12) 0px, transparent 50%),
               radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.1) 0px, transparent 50%),
               radial-gradient(at 50% 50%, rgba(236, 72, 153, 0.04) 0px, transparent 50%);
+  background-size: 200% 200%;
+  animation: mesh-drift 30s ease-in-out infinite alternate;
+}
+
+@keyframes mesh-drift {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes slow-pulse-glow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(1.08);
+  }
+}
+
+.animate-slow-glow {
+  animation: slow-pulse-glow 15s ease-in-out infinite alternate;
 }
 
 .animate-spin-slow {
@@ -227,7 +257,7 @@ p {
   border: 1px solid rgba(255, 255, 255, 0.06);
   background: linear-gradient(135deg, rgba(21, 21, 30, 0.75) 0%, rgba(15, 15, 22, 0.9) 100%);
   box-shadow: 0 15px 40px -15px rgba(0, 0, 0, 0.6);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
 }
@@ -248,7 +278,7 @@ p {
 
 .product-card-premium:hover {
   transform: translateY(-6px);
-  box-shadow: 0 30px 60px -15px rgba(139, 92, 246, 0.18), 0 0 35px -5px rgba(139, 92, 246, 0.06);
+  box-shadow: 0 30px 60px -15px rgba(139, 92, 246, 0.22), 0 0 35px -5px rgba(139, 92, 246, 0.08);
 }
 
 .product-card-premium:hover::before {
@@ -268,5 +298,21 @@ p {
   height: 1px;
   width: 100%;
   background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.2) 20%, rgba(168, 85, 247, 0.2) 80%, transparent);
+}
+
+/* Reduced Motion Settings */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+    transform: none !important;
+  }
 }
 

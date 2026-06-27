@@ -11,11 +11,11 @@ export default function Home() {
 
   // Fade-in animation variants
   const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
     },
   };
 
@@ -24,21 +24,26 @@ export default function Home() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
+        staggerChildren: 0.15,
       },
     },
   };
 
   return (
-    <div className="overflow-hidden bg-[#0B0B12] text-white relative">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="overflow-hidden bg-[#0B0B12] text-white relative"
+    >
       {/* Ambient background textures */}
       <div className="noise-overlay" />
       <div className="mesh-gradient absolute inset-0 pointer-events-none -z-10" />
       {/* SECTION 1: HERO */}
       <section className="relative min-h-[95vh] flex items-center py-20 md:py-32 border-b border-white/8">
         {/* Subtle background abstract gradient blur */}
-        <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary-purple/10 rounded-full blur-[140px] pointer-events-none -z-10 animate-fade-in" />
-        <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-secondary-purple/5 rounded-full blur-[120px] pointer-events-none -z-10 animate-fade-in" />
+        <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary-purple/10 rounded-full blur-[140px] pointer-events-none -z-10 animate-slow-glow" />
+        <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-secondary-purple/5 rounded-full blur-[120px] pointer-events-none -z-10 animate-slow-glow" />
 
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-20 lg:gap-8 items-center relative z-10">
           {/* Left Text */}
@@ -79,7 +84,7 @@ export default function Home() {
             >
               <Link
                 href="/products"
-                className="btn-premium-primary inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold transition-all active:scale-[0.98]"
+                className="btn-premium-primary inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-semibold transition-all active:scale-[0.98] group"
               >
                 Explore Products
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -95,14 +100,14 @@ export default function Home() {
 
           {/* Right Side: Premium Photographic Collage & Sync Hover */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
             className="lg:col-span-5 flex justify-center w-full relative min-h-[480px] lg:min-h-[550px]"
           >
             {/* Ambient Purple glows */}
-            <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-primary-purple/15 rounded-full blur-[100px] pointer-events-none -z-10 animate-pulse" />
-            <div className="absolute bottom-10 right-10 w-[250px] h-[250px] bg-secondary-purple/10 rounded-full blur-[90px] pointer-events-none -z-10 animate-pulse" />
+            <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-primary-purple/15 rounded-full blur-[100px] pointer-events-none -z-10 animate-slow-glow" />
+            <div className="absolute bottom-10 right-10 w-[250px] h-[250px] bg-secondary-purple/10 rounded-full blur-[90px] pointer-events-none -z-10 animate-slow-glow" />
 
             <div className="relative w-full max-w-md h-full min-h-[450px] flex items-center justify-center">
               {/* Image 1: Cafe Workspace (linked to Maira) */}
@@ -129,7 +134,7 @@ export default function Home() {
                   alt="Indian woman working in cafe"
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 hover:scale-[1.02]"
                   priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B12]/80 via-[#0B0B12]/10 to-transparent" />
@@ -164,7 +169,7 @@ export default function Home() {
                   alt="Indian woman traveling"
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 hover:scale-[1.02]"
                   priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B12]/80 via-[#0B0B12]/10 to-transparent" />
@@ -239,19 +244,25 @@ export default function Home() {
       {/* SECTION 2: ABOUT SUMMARY */}
       <section className="py-24 md:py-36 bg-transparent border-b border-white/8 relative overflow-hidden">
         {/* Soft decorative blur */}
-        <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] bg-primary-purple/5 rounded-full blur-[120px] pointer-events-none -z-10" />
-        <div className="absolute top-1/3 left-10 w-[300px] h-[300px] bg-secondary-purple/3 rounded-full blur-[100px] pointer-events-none -z-10" />
+        <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] bg-primary-purple/5 rounded-full blur-[120px] pointer-events-none -z-10 animate-slow-glow" />
+        <div className="absolute top-1/3 left-10 w-[300px] h-[300px] bg-secondary-purple/3 rounded-full blur-[100px] pointer-events-none -z-10 animate-slow-glow" />
 
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto px-6 md:px-12 relative z-10"
+        >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left: Copy */}
             <div className="flex flex-col gap-6">
-              <span className="text-xs font-bold text-primary-purple tracking-widest uppercase">The Philosophy</span>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              <motion.span variants={fadeInUp} className="text-xs font-bold text-primary-purple tracking-widest uppercase">The Philosophy</motion.span>
+              <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
                 Built From <br />
                 Real Conversations.
-              </h2>
-              <div className="flex flex-col gap-5 text-gray-text text-base md:text-lg leading-relaxed mt-2">
+              </motion.h2>
+              <motion.div variants={fadeInUp} className="flex flex-col gap-5 text-gray-text text-base md:text-lg leading-relaxed mt-2">
                 <p className="font-semibold text-white text-lg">
                   Safera Technologies builds technology by listening first.
                 </p>
@@ -261,34 +272,40 @@ export default function Home() {
                 <p>
                   From safer travel to trusted communities and AI-powered support, we create products that solve meaningful problems through thoughtful technology.
                 </p>
-              </div>
+              </motion.div>
             </div>
 
             {/* Right: Premium Image */}
-            <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+            <motion.div variants={fadeInUp} className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary-purple/10 to-transparent opacity-60 z-10 pointer-events-none" />
               <Image
                 src="/images/about_collaboration.png"
                 alt="Indian women collaborating in a modern tech workspace"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B12]/40 via-transparent to-transparent z-10" />
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* SECTION 3: OUR PRODUCTS */}
       <section className="py-24 md:py-36 bg-[#15151E]/20 border-b border-white/8 relative">
         {/* Subtle grid layout background */}
         <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none" />
-        <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-secondary-purple/5 rounded-full blur-[130px] pointer-events-none -z-10" />
+        <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-secondary-purple/5 rounded-full blur-[130px] pointer-events-none -z-10 animate-slow-glow" />
 
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <div className="max-w-2xl mb-20">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto px-6 md:px-12 relative z-10"
+        >
+          <motion.div variants={fadeInUp} className="max-w-2xl mb-20">
             <span className="text-xs font-bold text-primary-purple tracking-widest uppercase">Our Ecosystem</span>
             <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mt-4 mb-5">
               Explore Our Digital Products
@@ -296,23 +313,19 @@ export default function Home() {
             <p className="text-gray-text text-base md:text-lg max-w-xl">
               Each product addresses a different challenge while contributing to a shared mission of empowering women through technology.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
             {/* Card 1: Cohop */}
-            <motion.div
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="product-card-premium rounded-3xl flex flex-col justify-between min-h-[520px] overflow-hidden"
-            >
+            <motion.div variants={fadeInUp} className="product-card-premium rounded-3xl flex flex-col justify-between min-h-[520px] overflow-hidden group">
               {/* Image visual header */}
-              <div className="relative w-full h-48 border-b border-white/5 overflow-hidden group">
+              <div className="relative w-full h-48 border-b border-white/5 overflow-hidden">
                 <Image
                   src="/images/product_cohop_mockup.png"
                   alt="Cohop Travel mockup"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#15151E] via-transparent to-transparent" />
@@ -347,19 +360,15 @@ export default function Home() {
             </motion.div>
 
             {/* Card 2: Maira */}
-            <motion.div
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="product-card-premium rounded-3xl flex flex-col justify-between min-h-[520px] overflow-hidden"
-            >
+            <motion.div variants={fadeInUp} className="product-card-premium rounded-3xl flex flex-col justify-between min-h-[520px] overflow-hidden group">
               {/* Image visual header */}
-              <div className="relative w-full h-48 border-b border-white/5 overflow-hidden group">
+              <div className="relative w-full h-48 border-b border-white/5 overflow-hidden">
                 <Image
                   src="/images/product_maira_mockup.png"
                   alt="Maira AI support mockup"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#15151E] via-transparent to-transparent" />
@@ -395,31 +404,37 @@ export default function Home() {
           </div>
 
           {/* Coming Soon Teaser */}
-          <div className="mt-20 text-center border-t border-white/8 pt-12">
+          <motion.div variants={fadeInUp} className="mt-20 text-center border-t border-white/8 pt-12">
             <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold text-gray-text bg-white/5 border border-white/8 tracking-wider uppercase">
               Coming Soon
             </span>
             <p className="text-gray-text text-sm md:text-base mt-4">
               More women-first products are already in development.
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* SECTION 4: OUR PRINCIPLES */}
       <section className="py-24 md:py-36 bg-transparent border-b border-white/8 relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary-purple/3 rounded-full blur-[120px] pointer-events-none -z-10" />
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="text-center max-w-2xl mx-auto mb-20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary-purple/3 rounded-full blur-[120px] pointer-events-none -z-10 animate-slow-glow" />
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto px-6 md:px-12"
+        >
+          <motion.div variants={fadeInUp} className="text-center max-w-2xl mx-auto mb-20">
             <span className="text-xs font-bold text-primary-purple tracking-widest uppercase">Our Standards</span>
             <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mt-4">
               What Guides Every Product
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {/* Principle 1 */}
-            <div className="p-8 rounded-2xl border border-white/8 bg-[#15151E]/40 hover:bg-[#15151E]/85 hover:border-primary-purple/30 transition-all duration-300 shadow-xl hover:-translate-y-1">
+            <motion.div variants={fadeInUp} className="p-8 rounded-2xl glass-card glass-card-hover shadow-xl flex flex-col items-start">
               <div className="w-12 h-12 rounded-xl bg-primary-purple/10 flex items-center justify-center text-primary-purple mb-6 border border-primary-purple/15">
                 <ShieldAlert className="w-6 h-6" />
               </div>
@@ -427,10 +442,10 @@ export default function Home() {
               <p className="text-gray-text text-sm leading-relaxed">
                 Everything starts with creating safer, more reliable experiences.
               </p>
-            </div>
+            </motion.div>
 
             {/* Principle 2 */}
-            <div className="p-8 rounded-2xl border border-white/8 bg-[#15151E]/40 hover:bg-[#15151E]/85 hover:border-primary-purple/30 transition-all duration-300 shadow-xl hover:-translate-y-1">
+            <motion.div variants={fadeInUp} className="p-8 rounded-2xl glass-card glass-card-hover shadow-xl flex flex-col items-start">
               <div className="w-12 h-12 rounded-xl bg-primary-purple/10 flex items-center justify-center text-primary-purple mb-6 border border-primary-purple/15">
                 <Users className="w-6 h-6" />
               </div>
@@ -438,10 +453,10 @@ export default function Home() {
               <p className="text-gray-text text-sm leading-relaxed">
                 Built around real experiences, not assumptions.
               </p>
-            </div>
+            </motion.div>
 
             {/* Principle 3 */}
-            <div className="p-8 rounded-2xl border border-white/8 bg-[#15151E]/40 hover:bg-[#15151E]/85 hover:border-primary-purple/30 transition-all duration-300 shadow-xl hover:-translate-y-1">
+            <motion.div variants={fadeInUp} className="p-8 rounded-2xl glass-card glass-card-hover shadow-xl flex flex-col items-start">
               <div className="w-12 h-12 rounded-xl bg-primary-purple/10 flex items-center justify-center text-primary-purple mb-6 border border-primary-purple/15">
                 <EyeOff className="w-6 h-6" />
               </div>
@@ -449,10 +464,10 @@ export default function Home() {
               <p className="text-gray-text text-sm leading-relaxed">
                 Technology should protect people before collecting data.
               </p>
-            </div>
+            </motion.div>
 
             {/* Principle 4 */}
-            <div className="p-8 rounded-2xl border border-white/8 bg-[#15151E]/40 hover:bg-[#15151E]/85 hover:border-primary-purple/30 transition-all duration-300 shadow-xl hover:-translate-y-1">
+            <motion.div variants={fadeInUp} className="p-8 rounded-2xl glass-card glass-card-hover shadow-xl flex flex-col items-start">
               <div className="w-12 h-12 rounded-xl bg-primary-purple/10 flex items-center justify-center text-primary-purple mb-6 border border-primary-purple/15">
                 <Heart className="w-6 h-6" />
               </div>
@@ -460,35 +475,43 @@ export default function Home() {
               <p className="text-gray-text text-sm leading-relaxed">
                 Support grows stronger when women help women.
               </p>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* SECTION 5: FUTURE VISION */}
       <section className="py-28 md:py-44 bg-transparent relative overflow-hidden">
         {/* Subtle background abstract shape */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden -z-10">
-          <div className="w-[1000px] h-[400px] bg-gradient-to-tr from-primary-purple/10 to-secondary-purple/10 rounded-full blur-[140px] animate-pulse" />
+          <div className="w-[1000px] h-[400px] bg-gradient-to-tr from-primary-purple/10 to-secondary-purple/10 rounded-full blur-[140px] animate-slow-glow" />
         </div>
 
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <span className="text-xs font-bold text-primary-purple tracking-widest uppercase">The Future</span>
-          <h2 className="text-3xl md:text-6xl font-extrabold text-white tracking-tight mt-4 mb-8 leading-tight">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-4xl mx-auto px-6 text-center relative z-10"
+        >
+          <motion.span variants={fadeInUp} className="text-xs font-bold text-primary-purple tracking-widest uppercase">The Future</motion.span>
+          <motion.h2 variants={fadeInUp} className="text-3xl md:text-6xl font-extrabold text-white tracking-tight mt-4 mb-8 leading-tight">
             Building What&apos;s Next.
-          </h2>
-          <p className="text-gray-text text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-12">
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="text-gray-text text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-12">
             Cohop and Maira are only the beginning. Safera Technologies is building an ecosystem of thoughtful digital products focused on helping women travel confidently, connect safely, and navigate everyday life with greater support.
-          </p>
-          <Link
-            href="/contact"
-            className="btn-premium-primary inline-flex items-center gap-2 px-8 py-4 text-base font-semibold transition-all active:scale-[0.98]"
-          >
-            Get in Touch
-            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
+          </motion.p>
+          <motion.div variants={fadeInUp}>
+            <Link
+              href="/contact"
+              className="btn-premium-primary inline-flex items-center gap-2 px-8 py-4 text-base font-semibold transition-all active:scale-[0.98] group"
+            >
+              Get in Touch
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </motion.div>
+        </motion.div>
       </section>
-    </div>
+    </motion.div>
   );
 }

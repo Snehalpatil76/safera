@@ -36,7 +36,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,padding,border-color,box-shadow,backdrop-filter] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           scrolled
             ? "bg-[#0B0B12]/80 border-b border-white/8 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] backdrop-blur-xl py-4"
             : "bg-transparent py-6"
@@ -82,10 +82,10 @@ export default function Navbar() {
           <div className="hidden md:flex items-center">
             <Link
               href="/products"
-              className="btn-premium-primary inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.98]"
+              className="btn-premium-primary inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-[0.98] group"
             >
               Explore Products
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
 
@@ -131,10 +131,10 @@ export default function Navbar() {
             <Link
               href="/products"
               onClick={() => setMobileMenuOpen(false)}
-              className="btn-premium-primary flex items-center justify-center gap-2 w-full py-3.5 text-sm active:scale-[0.98] transition-transform duration-150 font-semibold"
+              className="btn-premium-primary flex items-center justify-center gap-2 w-full py-3.5 text-sm active:scale-[0.98] transition-transform duration-150 font-semibold group"
             >
               Explore Products
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </motion.div>
         )}

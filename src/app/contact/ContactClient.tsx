@@ -102,6 +102,7 @@ function ContactForm() {
             onSubmit={handleSubmit}
             className="flex flex-col gap-6"
             name="contact"
+            method="POST"
             data-netlify="true"
           >
             <input type="hidden" name="form-name" value="contact" />

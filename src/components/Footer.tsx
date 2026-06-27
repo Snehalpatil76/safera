@@ -122,14 +122,24 @@ export default function Footer() {
             <h3 className="font-bold text-white text-xs tracking-widest uppercase mb-4">Products</h3>
             <ul className="flex flex-col gap-3">
               <li>
-                <Link href="/products" className="text-gray-text hover:text-white text-sm transition-colors duration-200 link-underline">
+                <a
+                  href="https://cohop.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-text hover:text-white text-sm transition-colors duration-200 link-underline"
+                >
                   Cohop
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/products" className="text-gray-text hover:text-white text-sm transition-colors duration-200 link-underline">
+                <a
+                  href="https://maira.club/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-text hover:text-white text-sm transition-colors duration-200 link-underline"
+                >
                   Maira
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
@@ -139,8 +149,8 @@ export default function Footer() {
             <ul className="flex flex-col gap-3.5 text-sm text-gray-text">
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-primary-purple/80" />
-                <a href="mailto:social@cohop.in" className="hover:text-white transition-colors">
-                  social@cohop.in
+                <a href="mailto:social@safera.tech" className="hover:text-white transition-colors">
+                  social@safera.tech
                 </a>
               </li>
               <li className="flex items-center gap-3">

@@ -11,6 +11,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://safera.tech"),
+  robots: {
+    index: true,
+    follow: true,
+  },
   title: "Safera Technologies | Women-First Technology Company",
   description:
     "Safera Technologies is a women-first technology company solving real-world challenges through artificial intelligence, travel, and trusted communities.",

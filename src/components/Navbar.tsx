@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import Image from "next/image";
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -45,8 +47,15 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <span className="font-sans text-xl font-bold tracking-tight text-white flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-gradient-to-tr from-primary-purple to-secondary-purple inline-block shadow-[0_0_15px_rgba(139,92,246,0.5)]"></span>
+            <span className="font-sans text-xl font-bold tracking-tight text-white flex items-center gap-2.5">
+              <Image
+                src="/images/safera_logo_transparent.png"
+                alt="Safera Logo"
+                width={36}
+                height={36}
+                className="object-contain"
+                priority
+              />
               SAFERA
             </span>
           </Link>

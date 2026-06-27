@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Netlify Forms Detection</title>
+  </head>
+  <body>
+    <!-- This static form is parsed by Netlify during deployment to enable form submissions in the dashboard -->
+    <form name="contact" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>

@@ -213,7 +213,10 @@ function ContactForm() {
 
 export default function Contact() {
   return (
-    <div className="overflow-hidden bg-[#0B0B12] text-white">
+    <div className="overflow-hidden bg-[#0B0B12] text-white relative">
+      {/* Ambient background textures */}
+      <div className="noise-overlay" />
+      <div className="mesh-gradient absolute inset-0 pointer-events-none -z-10" />
       {/* Hero Header */}
       <section className="relative py-24 md:py-36 border-b border-white/8">
         {/* Ambient background glow */}
@@ -301,7 +304,7 @@ export default function Contact() {
                 <div>
                   <h3 className="text-xs font-bold text-gray-text uppercase tracking-widest mb-1.5">LinkedIn</h3>
                   <a
-                    href="https://www.linkedin.com/company/maira-app"
+                    href="https://www.linkedin.com/company/maira-club/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-base font-bold text-white hover:text-primary-purple transition-colors"

@@ -23,6 +23,27 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
+
 export default function Footer() {
   return (
     <footer className="bg-[#08080d] border-t border-white/8 py-20 md:py-28 relative overflow-hidden">
@@ -42,13 +63,23 @@ export default function Footer() {
           <div className="flex items-center gap-3 mt-2">
             {/* LinkedIn: Only include Maira LinkedIn page */}
             <a
-              href="https://www.linkedin.com/company/maira-app" 
+              href="https://www.linkedin.com/company/maira-club/" 
               target="_blank"
               rel="noopener noreferrer"
               className="p-2.5 rounded-xl border border-white/8 hover:border-primary-purple hover:bg-primary-purple/10 text-gray-text hover:text-white transition-all duration-300"
               aria-label="LinkedIn"
             >
               <LinkedinIcon className="w-4 h-4" />
+            </a>
+            {/* Instagram: Only include Maira Instagram page */}
+            <a
+              href="https://www.instagram.com/maira.india" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl border border-white/8 hover:border-primary-purple hover:bg-primary-purple/10 text-gray-text hover:text-white transition-all duration-300"
+              aria-label="Instagram"
+            >
+              <InstagramIcon className="w-4 h-4" />
             </a>
           </div>
         </div>

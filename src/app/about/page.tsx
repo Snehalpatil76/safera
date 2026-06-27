@@ -2,8 +2,49 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, EyeOff, ShieldCheck, Sparkles, HeartHandshake } from "lucide-react";
 import { motion } from "framer-motion";
+
+function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect width="4" height="12" x="2" y="9" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
+
+function TwitterIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+    </svg>
+  );
+}
 
 export default function About() {
   const fadeInUp = {
@@ -26,39 +67,66 @@ export default function About() {
   };
 
   return (
-    <div className="overflow-hidden bg-[#0B0B12] text-white">
+    <div className="overflow-hidden bg-[#0B0B12] text-white relative">
+      {/* Ambient background textures */}
+      <div className="noise-overlay" />
+      <div className="mesh-gradient absolute inset-0 pointer-events-none -z-10" />
       {/* Hero Section */}
-      <section className="relative py-24 md:py-36 border-b border-white/8">
-        {/* Subtle background glow */}
-        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary-purple/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <section className="relative py-24 md:py-36 border-b border-white/8 overflow-hidden">
+        {/* Subtle background glows */}
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary-purple/10 rounded-full blur-[140px] pointer-events-none -z-10 animate-pulse" />
+        <div className="absolute bottom-10 left-10 w-[300px] h-[300px] bg-secondary-purple/5 rounded-full blur-[100px] pointer-events-none -z-10" />
+        <div className="noise-overlay" />
         
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="max-w-3xl flex flex-col gap-6"
-          >
-            <motion.span
-              variants={fadeInUp}
-              className="text-xs font-bold text-primary-purple tracking-widest uppercase"
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left Column: Text */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainer}
+              className="flex flex-col gap-6"
             >
-              Who We Are
-            </motion.span>
-            <motion.h1
-              variants={fadeInUp}
-              className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] md:leading-[1.15]"
+              <motion.span
+                variants={fadeInUp}
+                className="text-xs font-bold text-primary-purple tracking-widest uppercase"
+              >
+                Who We Are
+              </motion.span>
+              <motion.h1
+                variants={fadeInUp}
+                className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.1] md:leading-[1.15]"
+              >
+                Building Technology <br className="hidden md:inline" />
+                With Genuine Purpose.
+              </motion.h1>
+              <motion.p
+                variants={fadeInUp}
+                className="text-gray-text text-lg leading-relaxed mt-2"
+              >
+                Safera Technologies is a women-first technology company. We build digital products that address genuine everyday decisions, challenges, and experiences by focusing on safety, trusted communities, and artificial intelligence.
+              </motion.p>
+            </motion.div>
+
+            {/* Right Column: Premium Image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+              className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group"
             >
-              Building Technology <br className="hidden md:inline" />
-              With Genuine Purpose.
-            </motion.h1>
-            <motion.p
-              variants={fadeInUp}
-              className="text-gray-text text-lg md:text-xl leading-relaxed mt-4"
-            >
-              Safera Technologies is a women-first technology company. We build digital products that address genuine everyday decisions, challenges, and experiences by focusing on safety, trusted communities, and artificial intelligence.
-            </motion.p>
-          </motion.div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary-purple/10 to-transparent opacity-60 z-10 pointer-events-none" />
+              <Image
+                src="/images/about_collaboration.png"
+                alt="Indian women collaborating in a workspace"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B12]/40 via-transparent to-transparent z-10" />
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -172,6 +240,91 @@ export default function About() {
               Explore Products
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Founders Section */}
+      <section className="py-24 md:py-36 bg-transparent border-b border-white/8 relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary-purple/5 rounded-full blur-[140px] pointer-events-none -z-10" />
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+          <div className="text-center max-w-xl mx-auto mb-20">
+            <span className="text-xs font-bold text-primary-purple tracking-widest uppercase">The Team</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mt-4">
+              Meet Our Founders
+            </h2>
+            <p className="text-gray-text text-sm md:text-base mt-4">
+              Building technology designed around women&apos;s real lives and safety.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 lg:gap-16 max-w-4xl mx-auto">
+            {/* Founder 1: Manan Jhaveri */}
+            <div className="flex flex-col items-center text-center p-8 rounded-3xl glass-card glass-card-hover relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-primary-purple/5 rounded-full blur-[50px] pointer-events-none" />
+              
+              {/* Circular portrait with purple accent lighting via shadow/glow */}
+              <div className="relative w-[200px] h-[200px] rounded-full overflow-hidden mb-6 border-2 border-primary-purple/30 avatar-glow group-hover:border-primary-purple/65 transition-colors duration-300">
+                <Image
+                  src="/images/founders/Manan.jpeg"
+                  alt="Manan Jhaveri"
+                  fill
+                  sizes="(max-width: 768px) 200px, 200px"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+
+              <h3 className="text-2xl font-extrabold text-white mb-1">Manan Jhaveri</h3>
+              <p className="text-xs font-bold text-primary-purple tracking-wider uppercase mb-4">Co-Founder & Technology</p>
+              
+              <p className="text-gray-text text-sm leading-relaxed mb-6 max-w-xs">
+                Technology should solve real problems—not create more complexity. At Safera, we&apos;re building products that people genuinely trust because they improve everyday life and empower women through thoughtful technology.
+              </p>
+
+              <div className="flex gap-4">
+                <a href="https://www.linkedin.com/company/maira-club/" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-text hover:text-white hover:bg-white/5 rounded-full transition-all" aria-label="Manan Jhaveri LinkedIn">
+                  <LinkedinIcon className="w-5 h-5" />
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-text hover:text-white hover:bg-white/5 rounded-full transition-all" aria-label="Manan Jhaveri Twitter">
+                  <TwitterIcon className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Founder 2: Snigdh Katiyar */}
+            <div className="flex flex-col items-center text-center p-8 rounded-3xl glass-card glass-card-hover relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-secondary-purple/5 rounded-full blur-[50px] pointer-events-none" />
+              
+              {/* Circular portrait with purple accent lighting via shadow/glow */}
+              <div className="relative w-[200px] h-[200px] rounded-full overflow-hidden mb-6 border-2 border-secondary-purple/30 avatar-glow-secondary group-hover:border-secondary-purple/65 transition-colors duration-300">
+                <Image
+                  src="/images/founders/Snigdh.jpeg"
+                  alt="Snigdh Katiyar"
+                  fill
+                  sizes="(max-width: 768px) 200px, 200px"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+
+              <h3 className="text-2xl font-extrabold text-white mb-1">Snigdh Katiyar</h3>
+              <p className="text-xs font-bold text-secondary-purple tracking-wider uppercase mb-4">Co-Founder & Growth</p>
+              
+              <p className="text-gray-text text-sm leading-relaxed mb-6 max-w-xs">
+                Every conversation with our community teaches us something new. Those insights shape every product we build, ensuring our products are driven by real experiences, empathy, and meaningful impact.
+              </p>
+
+              <div className="flex gap-4">
+                <a href="https://www.linkedin.com/company/maira-club/" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-text hover:text-white hover:bg-white/5 rounded-full transition-all" aria-label="Snigdh Katiyar LinkedIn">
+                  <LinkedinIcon className="w-5 h-5" />
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-text hover:text-white hover:bg-white/5 rounded-full transition-all" aria-label="Snigdh Katiyar Twitter">
+                  <TwitterIcon className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>

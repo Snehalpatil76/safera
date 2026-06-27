@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Compass, ShieldAlert, Heart, EyeOff, Users, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -29,7 +30,10 @@ export default function Home() {
   };
 
   return (
-    <div className="overflow-hidden bg-[#0B0B12] text-white">
+    <div className="overflow-hidden bg-[#0B0B12] text-white relative">
+      {/* Ambient background textures */}
+      <div className="noise-overlay" />
+      <div className="mesh-gradient absolute inset-0 pointer-events-none -z-10" />
       {/* SECTION 1: HERO */}
       <section className="relative min-h-[95vh] flex items-center py-20 md:py-32 border-b border-white/8">
         {/* Subtle background abstract gradient blur */}
@@ -89,91 +93,143 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          {/* Right Side: Premium Ecosystem Card */}
+          {/* Right Side: Premium Photographic Collage & Sync Hover */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="lg:col-span-5 flex justify-center w-full"
+            className="lg:col-span-5 flex justify-center w-full relative min-h-[480px] lg:min-h-[550px]"
           >
-            <div className="relative w-full max-w-md glass-card rounded-3xl p-8 overflow-hidden group shadow-2xl border-white/8 hover:border-primary-purple/20 transition-all duration-500">
-              {/* Card border shine hover effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-purple/5 via-transparent to-secondary-purple/5 opacity-60 pointer-events-none" />
+            {/* Ambient Purple glows */}
+            <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-primary-purple/15 rounded-full blur-[100px] pointer-events-none -z-10 animate-pulse" />
+            <div className="absolute bottom-10 right-10 w-[250px] h-[250px] bg-secondary-purple/10 rounded-full blur-[90px] pointer-events-none -z-10 animate-pulse" />
 
-              {/* SAFERA CENTER NODE */}
-              <div className="relative flex flex-col items-center justify-center pb-6 border-b border-white/8 text-center">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-primary-purple to-secondary-purple flex items-center justify-center shadow-lg shadow-primary-purple/30 mb-4 animate-pulse">
-                  <span className="text-white text-lg font-black tracking-widest">S</span>
+            <div className="relative w-full max-w-md h-full min-h-[450px] flex items-center justify-center">
+              {/* Image 1: Cafe Workspace (linked to Maira) */}
+              <motion.div
+                animate={{
+                  y: [0, -12, 0],
+                  rotate: -3,
+                  scale: activeProduct === "maira" ? 1.05 : activeProduct === "cohop" ? 0.92 : 1,
+                  filter: activeProduct === "cohop" ? "brightness(0.6) blur(2px)" : "brightness(1) blur(0px)",
+                }}
+                transition={{
+                  y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+                  scale: { duration: 0.4, ease: "easeOut" },
+                  filter: { duration: 0.4 },
+                }}
+                className={`absolute top-0 left-0 w-[65%] aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border transition-all duration-500 ${
+                  activeProduct === "maira"
+                    ? "border-secondary-purple/50 shadow-secondary-purple/20 z-30"
+                    : "border-white/10 z-10"
+                }`}
+              >
+                <Image
+                  src="/images/hero_cafe.png"
+                  alt="Indian woman working in cafe"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B12]/80 via-[#0B0B12]/10 to-transparent" />
+                <div className="absolute bottom-4 left-4 z-10">
+                  <span className="text-[9px] font-bold text-secondary-purple bg-secondary-purple/15 border border-secondary-purple/25 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                    Maira AI Workspace
+                  </span>
                 </div>
-                <h2 className="text-2xl font-extrabold tracking-tight text-white">SAFERA</h2>
-                <p className="text-[10px] text-primary-purple font-bold tracking-widest uppercase mt-1">
-                  Women-first technology company
-                </p>
-              </div>
+              </motion.div>
 
-              {/* Ecosystem Grid */}
-              <div className="mt-8 flex flex-col gap-5">
-                {/* Cohop Item */}
-                <div
+              {/* Image 2: Travel (linked to Cohop) */}
+              <motion.div
+                animate={{
+                  y: [0, 12, 0],
+                  rotate: 4,
+                  scale: activeProduct === "cohop" ? 1.05 : activeProduct === "maira" ? 0.92 : 1,
+                  filter: activeProduct === "maira" ? "brightness(0.6) blur(2px)" : "brightness(1) blur(0px)",
+                }}
+                transition={{
+                  y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 },
+                  scale: { duration: 0.4, ease: "easeOut" },
+                  filter: { duration: 0.4 },
+                }}
+                className={`absolute bottom-0 right-0 w-[65%] aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border transition-all duration-500 ${
+                  activeProduct === "cohop"
+                    ? "border-primary-purple/50 shadow-primary-purple/20 z-30"
+                    : "border-white/10 z-20"
+                }`}
+              >
+                <Image
+                  src="/images/hero_travel.png"
+                  alt="Indian woman traveling"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B12]/80 via-[#0B0B12]/10 to-transparent" />
+                <div className="absolute bottom-4 left-4 z-10">
+                  <span className="text-[9px] font-bold text-primary-purple bg-primary-purple/15 border border-primary-purple/25 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                    Cohop Travel
+                  </span>
+                </div>
+              </motion.div>
+
+              {/* Floating Interaction Badges in the Center */}
+              <div className="absolute z-40 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-4 w-[85%] max-w-[270px]">
+                {/* Cohop Badge */}
+                <motion.div
+                  whileHover={{ scale: 1.03, y: -2 }}
                   onMouseEnter={() => setActiveProduct("cohop")}
                   onMouseLeave={() => setActiveProduct(null)}
-                  className={`p-5 rounded-2xl border transition-all duration-300 cursor-pointer ${
+                  className={`glass-card p-4 rounded-2xl border cursor-pointer backdrop-blur-xl transition-all duration-300 ${
                     activeProduct === "cohop"
-                      ? "border-primary-purple/30 bg-[#15151E] shadow-[0_0_20px_rgba(139,92,246,0.15)] translate-x-1"
-                      : "border-white/5 bg-white/2 hover:border-white/10 hover:bg-white/5"
+                      ? "border-primary-purple/40 bg-[#15151E]/95 shadow-[0_0_30px_rgba(139,92,246,0.3)] scale-[1.03]"
+                      : "border-white/8 bg-[#15151E]/65 hover:border-white/20"
                   }`}
                 >
-                  <div className="flex justify-between items-start">
+                  <div className="flex justify-between items-center gap-3">
                     <div>
-                      <h3 className="font-extrabold text-white text-sm tracking-wide flex items-center gap-2">
+                      <h3 className="font-extrabold text-white text-xs tracking-wider flex items-center gap-1.5">
                         COHOP
-                        <span className="text-[9px] bg-primary-purple/10 text-primary-purple px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+                        <span className="text-[8px] bg-primary-purple/15 text-primary-purple px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
                           Travel
                         </span>
                       </h3>
-                      <p className="text-xs text-gray-text mt-2 leading-relaxed">
-                        Helping women travel confidently through trusted, verified communities.
+                      <p className="text-[10px] text-gray-text mt-1 leading-normal">
+                        Safe commuting, hubs & verified travel matching.
                       </p>
                     </div>
-                    <Compass className={`w-4 h-4 transition-all duration-300 ${activeProduct === "cohop" ? "rotate-45 text-primary-purple scale-110" : "text-gray-text"}`} />
+                    <Compass className={`w-4 h-4 shrink-0 transition-all duration-300 ${activeProduct === "cohop" ? "rotate-45 text-primary-purple scale-110" : "text-gray-text"}`} />
                   </div>
-                </div>
+                </motion.div>
 
-                {/* Maira Item */}
-                <div
+                {/* Maira Badge */}
+                <motion.div
+                  whileHover={{ scale: 1.03, y: -2 }}
                   onMouseEnter={() => setActiveProduct("maira")}
                   onMouseLeave={() => setActiveProduct(null)}
-                  className={`p-5 rounded-2xl border transition-all duration-300 cursor-pointer ${
+                  className={`glass-card p-4 rounded-2xl border cursor-pointer backdrop-blur-xl transition-all duration-300 ${
                     activeProduct === "maira"
-                      ? "border-secondary-purple/30 bg-[#15151E] shadow-[0_0_20px_rgba(168,85,247,0.15)] translate-x-1"
-                      : "border-white/5 bg-white/2 hover:border-white/10 hover:bg-white/5"
+                      ? "border-secondary-purple/40 bg-[#15151E]/95 shadow-[0_0_30px_rgba(168,85,247,0.3)] scale-[1.03]"
+                      : "border-white/8 bg-[#15151E]/65 hover:border-white/20"
                   }`}
                 >
-                  <div className="flex justify-between items-start">
+                  <div className="flex justify-between items-center gap-3">
                     <div>
-                      <h3 className="font-extrabold text-white text-sm tracking-wide flex items-center gap-2">
+                      <h3 className="font-extrabold text-white text-xs tracking-wider flex items-center gap-1.5">
                         MAIRA
-                        <span className="text-[9px] bg-secondary-purple/10 text-secondary-purple px-2 py-0.5 rounded font-bold uppercase tracking-wider">
-                          AI & Support
+                        <span className="text-[8px] bg-secondary-purple/15 text-secondary-purple px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
+                          AI Support
                         </span>
                       </h3>
-                      <p className="text-xs text-gray-text mt-2 leading-relaxed">
-                        A private AI-powered platform for safe guidance, anonymous sharing, and connection.
+                      <p className="text-[10px] text-gray-text mt-1 leading-normal">
+                        Anonymous sharing, guidance & wellness support.
                       </p>
                     </div>
-                    <Heart className={`w-4 h-4 transition-all duration-300 ${activeProduct === "maira" ? "scale-110 text-secondary-purple" : "text-gray-text"}`} />
+                    <Heart className={`w-4 h-4 shrink-0 transition-all duration-300 ${activeProduct === "maira" ? "scale-110 text-secondary-purple" : "text-gray-text"}`} />
                   </div>
-                </div>
-
-                {/* Future Products */}
-                <div className="p-5 rounded-2xl border border-dashed border-white/10 bg-white/1 text-center">
-                  <span className="inline-block text-[9px] font-bold tracking-wider text-gray-text/80 bg-white/5 border border-white/8 px-3 py-1 rounded-full mb-2 uppercase">
-                    Future Products
-                  </span>
-                  <p className="text-xs text-gray-text">
-                    Building the next generation of women-first technology.
-                  </p>
-                </div>
+                </motion.div>
               </div>
             </div>
           </motion.div>
@@ -181,27 +237,45 @@ export default function Home() {
       </section>
 
       {/* SECTION 2: ABOUT SUMMARY */}
-      <section className="py-24 md:py-36 bg-transparent border-b border-white/8 relative">
-        <div className="absolute top-1/2 left-1/4 w-[350px] h-[350px] bg-primary-purple/5 rounded-full blur-[100px] pointer-events-none -z-10" />
+      <section className="py-24 md:py-36 bg-transparent border-b border-white/8 relative overflow-hidden">
+        {/* Soft decorative blur */}
+        <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] bg-primary-purple/5 rounded-full blur-[120px] pointer-events-none -z-10" />
+        <div className="absolute top-1/3 left-10 w-[300px] h-[300px] bg-secondary-purple/3 rounded-full blur-[100px] pointer-events-none -z-10" />
+
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-            <div className="lg:col-span-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left: Copy */}
+            <div className="flex flex-col gap-6">
               <span className="text-xs font-bold text-primary-purple tracking-widest uppercase">The Philosophy</span>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mt-4 leading-tight">
+              <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
                 Built From <br />
                 Real Conversations.
               </h2>
+              <div className="flex flex-col gap-5 text-gray-text text-base md:text-lg leading-relaxed mt-2">
+                <p className="font-semibold text-white text-lg">
+                  Safera Technologies builds technology by listening first.
+                </p>
+                <p>
+                  Every product begins with understanding the everyday decisions, challenges, and experiences women navigate.
+                </p>
+                <p>
+                  From safer travel to trusted communities and AI-powered support, we create products that solve meaningful problems through thoughtful technology.
+                </p>
+              </div>
             </div>
-            <div className="lg:col-span-7 flex flex-col gap-6 text-gray-text text-base md:text-lg leading-relaxed">
-              <p className="font-semibold text-white text-lg">
-                Safera Technologies builds technology by listening first.
-              </p>
-              <p>
-                Every product begins with understanding the everyday decisions, challenges, and experiences women navigate.
-              </p>
-              <p>
-                From safer travel to trusted communities and AI-powered support, we create products that solve meaningful problems through thoughtful technology.
-              </p>
+
+            {/* Right: Premium Image */}
+            <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary-purple/10 to-transparent opacity-60 z-10 pointer-events-none" />
+              <Image
+                src="/images/about_collaboration.png"
+                alt="Indian women collaborating in a modern tech workspace"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B12]/40 via-transparent to-transparent z-10" />
             </div>
           </div>
         </div>
@@ -227,66 +301,96 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
             {/* Card 1: Cohop */}
             <motion.div
-              whileHover={{ y: -6 }}
+              whileHover={{ y: -8 }}
               transition={{ duration: 0.3 }}
-              className="glass-card glass-card-hover rounded-3xl p-8 md:p-12 flex flex-col justify-between min-h-[450px]"
+              className="product-card-premium rounded-3xl flex flex-col justify-between min-h-[520px] overflow-hidden"
             >
-              <div>
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-12 rounded-xl bg-primary-purple/10 flex items-center justify-center text-primary-purple border border-primary-purple/20">
-                    <Compass className="w-6 h-6 animate-spin-slow" />
-                  </div>
-                  <h3 className="text-3xl font-extrabold tracking-tight text-white">Cohop</h3>
-                </div>
-                
-                <h4 className="text-xl font-bold text-primary-purple tracking-tight leading-snug mb-4">
-                  Travel. Explore. Safer. Together.
-                </h4>
-                
-                <p className="text-gray-text text-sm md:text-base leading-relaxed mb-8">
-                  A verified travel community helping women discover destinations, connect with fellow travellers, and explore confidently through trusted recommendations and local communities.
-                </p>
+              {/* Image visual header */}
+              <div className="relative w-full h-48 border-b border-white/5 overflow-hidden group">
+                <Image
+                  src="/images/product_cohop_mockup.png"
+                  alt="Cohop Travel mockup"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#15151E] via-transparent to-transparent" />
               </div>
 
-              <Link
-                href="/products#cohop"
-                className="inline-flex items-center gap-2 font-semibold text-sm text-primary-purple hover:text-white group/link mt-auto self-start transition-all"
-              >
-                Visit Cohop
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-              </Link>
+              <div className="p-8 md:p-10 flex-grow flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3.5 mb-6">
+                    <div className="w-10 h-10 rounded-xl bg-primary-purple/10 flex items-center justify-center text-primary-purple border border-primary-purple/15">
+                      <Compass className="w-5 h-5 animate-spin-slow" />
+                    </div>
+                    <h3 className="text-2xl font-extrabold tracking-tight text-white">Cohop</h3>
+                  </div>
+                  
+                  <h4 className="text-lg font-bold text-primary-purple tracking-tight leading-snug mb-3">
+                    Travel. Explore. Safer. Together.
+                  </h4>
+                  
+                  <p className="text-gray-text text-sm leading-relaxed mb-6">
+                    A verified travel community helping women discover destinations, connect with fellow travellers, and explore confidently through trusted recommendations and local communities.
+                  </p>
+                </div>
+
+                <Link
+                  href="/products#cohop"
+                  className="inline-flex items-center gap-2 font-semibold text-sm text-primary-purple hover:text-white group/link mt-auto self-start transition-all"
+                >
+                  Visit Cohop
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                </Link>
+              </div>
             </motion.div>
 
             {/* Card 2: Maira */}
             <motion.div
-              whileHover={{ y: -6 }}
+              whileHover={{ y: -8 }}
               transition={{ duration: 0.3 }}
-              className="glass-card glass-card-hover rounded-3xl p-8 md:p-12 flex flex-col justify-between min-h-[450px]"
+              className="product-card-premium rounded-3xl flex flex-col justify-between min-h-[520px] overflow-hidden"
             >
-              <div>
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-12 rounded-xl bg-secondary-purple/10 flex items-center justify-center text-secondary-purple border border-secondary-purple/20">
-                    <Heart className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-3xl font-extrabold tracking-tight text-white">Maira</h3>
-                </div>
-                
-                <h4 className="text-xl font-bold text-secondary-purple tracking-tight leading-snug mb-4">
-                  A Place Where Women Can Simply Be Honest.
-                </h4>
-                
-                <p className="text-gray-text text-sm md:text-base leading-relaxed mb-8">
-                  A private AI-powered platform where women can seek guidance, share lived experiences, ask questions anonymously, and receive meaningful support from both technology and community.
-                </p>
+              {/* Image visual header */}
+              <div className="relative w-full h-48 border-b border-white/5 overflow-hidden group">
+                <Image
+                  src="/images/product_maira_mockup.png"
+                  alt="Maira AI support mockup"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#15151E] via-transparent to-transparent" />
               </div>
 
-              <Link
-                href="/products#maira"
-                className="inline-flex items-center gap-2 font-semibold text-sm text-secondary-purple hover:text-white group/link mt-auto self-start transition-all"
-              >
-                Visit Maira
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-              </Link>
+              <div className="p-8 md:p-10 flex-grow flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3.5 mb-6">
+                    <div className="w-10 h-10 rounded-xl bg-secondary-purple/10 flex items-center justify-center text-secondary-purple border border-secondary-purple/15">
+                      <Heart className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-2xl font-extrabold tracking-tight text-white">Maira</h3>
+                  </div>
+                  
+                  <h4 className="text-lg font-bold text-secondary-purple tracking-tight leading-snug mb-3">
+                    A Place Where Women Can Simply Be Honest.
+                  </h4>
+                  
+                  <p className="text-gray-text text-sm leading-relaxed mb-6">
+                    A private AI-powered platform where women can seek guidance, share lived experiences, ask questions anonymously, and receive meaningful support from both technology and community.
+                  </p>
+                </div>
+
+                <Link
+                  href="/products#maira"
+                  className="inline-flex items-center gap-2 font-semibold text-sm text-secondary-purple hover:text-white group/link mt-auto self-start transition-all"
+                >
+                  Visit Maira
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                </Link>
+              </div>
             </motion.div>
           </div>
 

@@ -26,7 +26,10 @@ export default function Careers() {
   };
 
   return (
-    <div className="overflow-hidden bg-[#0B0B12] text-white">
+    <div className="overflow-hidden bg-[#0B0B12] text-white relative">
+      {/* Ambient background textures */}
+      <div className="noise-overlay" />
+      <div className="mesh-gradient absolute inset-0 pointer-events-none -z-10" />
       {/* Hero Section */}
       <section className="relative py-24 md:py-36 border-b border-white/8">
         {/* Subtle background glow */}
